@@ -1,0 +1,66 @@
+def display_question(question):
+    """
+    Display the question and options to the user.
+    """
+    print(question['question'])
+    for option in question['options']:
+        print(option)
+
+def get_user_answer():
+    """
+    Get and validate user input for the answer.
+    """
+    while True:
+        user_input = input("Your answer (A, B, C, or D): ").upper()
+        if user_input in ['A', 'B', 'C', 'D']:
+            return user_input
+        else:
+            print("Invalid input. Please enter A, B, C, or D.")
+
+def evaluate_answer(user_answer, correct_answer):
+    """
+    Evaluate the user's answer and provide feedback.
+    """
+    if user_answer == correct_answer:
+        print("Correct!")
+        return 1
+    else:
+        print(f"Wrong! The correct answer is {correct_answer}.")
+        return 0
+
+def start_quiz(questions):
+    """
+    Start the quiz, ask questions, and calculate the final score.
+    """
+    score = 0
+    print("Welcome to the Quiz Game!\n")
+
+    for question in questions:
+        display_question(question)
+        user_answer = get_user_answer()
+        score += evaluate_answer(user_answer, question['correct_answer'])
+        print()  # Add a newline for better readability
+
+    print(f"Quiz completed! Your final score is {score}/{len(questions)}.")
+
+# Example quiz questions
+questions = [
+    {
+        'question': 'What is the capital of France?',
+        'options': ['A. Berlin', 'B. Madrid', 'C. Paris', 'D. Rome'],
+        'correct_answer': 'C'
+    },
+    {
+        'question': 'Which planet is known as the Red Planet?',
+        'options': ['A. Mars', 'B. Venus', 'C. Jupiter', 'D. Saturn'],
+        'correct_answer': 'A'
+    },
+    {
+        'question': 'What is the largest mammal?',
+        'options': ['A. Elephant', 'B. Blue Whale', 'C. Giraffe', 'D. Lion'],
+        'correct_answer': 'B'
+    }
+]
+
+# Run the quiz
+start_quiz(questions)
